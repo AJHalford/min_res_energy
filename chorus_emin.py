@@ -19,8 +19,9 @@ constcgs = pc.plasmaCGS()
 __version__ = 0.01
 __author__ = 'A.J. Halford'
 
-#### only want alpha = 0 I think. 
-
+#### only want alpha = 0 I think as this should produce the minimum energy the wave is resonant with. 
+#Here we are getting the needed constants and hard coding in the local magnetic field (B), density (den) 
+#and center freqnecy of the wave (w_center)
 q = const['e']
 c = const['c']
 me = const['m_e']
@@ -28,9 +29,11 @@ B = 167.*10**(-9.)
 den = 12.
 w_center = (2.*np.pi*2600.)/(const['e']*abs(B)/const['m_e'])
 
+#These are the relevent electron cyclotron and plasma frequencies
 omega_e =q*B/(const['m_e'])
 omega_p = den*q**2./(const['ep_0']*me)
 
+#Now we start calculating the minimum resonant energy following the equations from Summers et al 2007
 k2 = (w_center**2./c**2.) - ((omega_p**2/c**2.)/(1-(omega_e/w_center)))
 k = np.sqrt(k2)
 
